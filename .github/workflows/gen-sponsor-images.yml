@@ -1,0 +1,43 @@
+name: Generate sponsor images
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
+  push:
+    branches:
+      - main
+    paths:
+      - sponsorkit.config.ts
+      - .github/workflows/gen-sponsor-images.yml
+      - scripts/gen-sponsors-images.sh
+
+
+jobs:
+  update-sponsors:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set node
+        uses: actions/setup-node@v3
+        with:
+          node-version: lts/*
+
+      - run: npx pnpm i
+
+      - name: Update sponsors
+        run: npm run gen-sponsors-images
+        env:
+          SPONSORKIT_GITHUB_TOKEN: ${{ secrets.SPONSORS_TOKEN }}
+          SPONSORKIT_GITHUB_LOGIN: productdevbook
+
+      - name: Commit
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: "chore: update sponsors.svg"
+          add: "sponsors"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,8 @@
+{
+	"scripts": {
+		"gen-sponsors-images": "sh scripts/gen-sponsors-images.sh"
+	},
+	"devDependencies": {
+		"sponsorkit": "^0.8.1"
+	}
+}
