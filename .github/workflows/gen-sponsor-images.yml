@@ -12,6 +12,8 @@ on:
       - .github/workflows/gen-sponsor-images.yml
       - scripts/gen-sponsors-images.sh
 
+permissions:
+   contents: write
 
 jobs:
   update-sponsors:
