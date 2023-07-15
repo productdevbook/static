@@ -40,7 +40,6 @@ jobs:
         with:
           message: "chore: update sponsors.svg"
           add: "sponsors.*"
-          commit: "chore: update sponsors.svg"
           push: true
           github_token: ${{ secrets.GITHUB_TOKEN }}
         env:
