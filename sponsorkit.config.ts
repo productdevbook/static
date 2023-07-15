@@ -1,6 +1,7 @@
 import { defineConfig, presets } from 'sponsorkit'
 
 export default defineConfig({
+  formats: ['json', 'svg', 'png'],
   tiers: [
     {
       title: 'Past Sponsors',
@@ -13,7 +14,7 @@ export default defineConfig({
     },
     {
       title: 'Sponsors',
-      monthlyDollars: 10,
+      monthlyDollars: 7,
       preset: {
         avatar: {
           size: 42,
@@ -27,18 +28,23 @@ export default defineConfig({
     },
     {
       title: 'Silver Sponsors',
-      monthlyDollars: 50,
-      preset: presets.medium,
+      monthlyDollars: 100,
+      preset: presets.base,
     },
     {
       title: 'Gold Sponsors',
-      monthlyDollars: 100,
-      preset: presets.large,
+      monthlyDollars: 250,
+      preset: presets.medium,
     },
     {
       title: 'Platinum Sponsors',
       monthlyDollars: 500,
-      preset: presets.xl,
+      preset: presets.large,
     },
+    {
+      title: 'Diamond Sponsors',
+      monthlyDollars: 1000,
+      preset: presets.xl,
+    }
   ]
 })
