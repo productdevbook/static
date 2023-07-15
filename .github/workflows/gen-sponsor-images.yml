@@ -21,8 +21,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set node
         uses: actions/setup-node@v3
@@ -38,9 +36,9 @@ jobs:
           SPONSORKIT_GITHUB_LOGIN: productdevbook
 
       - name: Commit
-        uses: EndBug/add-and-commit@v9
+        uses: EndBug/add-and-commit@v4
         with:
           message: "chore: update sponsors.svg"
-          add: "sponsors"
+          add: "sponsors.*"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
