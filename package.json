@@ -1,8 +1,17 @@
 {
-	"scripts": {
-		"gen-sponsors-images": "sh scripts/gen-sponsors-images.sh"
-	},
-	"devDependencies": {
-		"sponsorkit": "^0.8.5"
-	}
+  "type": "module",
+  "packageManager": "pnpm@10.13.1",
+  "scripts": {
+    "build": "sponsorkit"
+  },
+  "devDependencies": {
+    "@types/node": "^22.16.4",
+    "sponsorkit": "^16.5.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp"
+    ]
+  }
 }

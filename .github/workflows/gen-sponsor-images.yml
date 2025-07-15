@@ -1,45 +1,39 @@
-name: Generate sponsor images
+name: Scheduler
 
 on:
-  # workflow_dispatch:
-  # schedule:
-  #   - cron: '0 0 * * *'
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
   push:
-    branches:
-      - main
-    # paths:
-    #   - sponsorkit.config.ts
-    #   - .github/workflows/gen-sponsor-images.yml
-    #   - scripts/gen-sponsors-images.sh
-
-permissions:
-  pull-requests: write
-  contents: write
+    branches: [ master ]
 
 jobs:
   update-sponsors:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
 
       - name: Set node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: lts/*
 
-      - run: npx pnpm i
+      - run: pnpm i
 
       - name: Update sponsors
-        run: npm run gen-sponsors-images
+        run: npm run build
         env:
-          SPONSORKIT_GITHUB_TOKEN: ${{ secrets.SPONSORS_TOKEN }}
+          SPONSORKIT_GITHUB_TOKEN: ${{ secrets.SPONSORKIT_GITHUB_TOKEN }}
           SPONSORKIT_GITHUB_LOGIN: productdevbook
 
       - name: Commit
         uses: EndBug/add-and-commit@v9
         with:
-          message: "chore: update sponsors.svg"
+          author_name: GitHub Actions
+          author_email: 41898282+github-actions[bot]@users.noreply.github.com
+          message: 'chore: update sponsors.svg [ci skip]'
           add: "sponsors.*"
-          push: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
